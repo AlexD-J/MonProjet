@@ -57,8 +57,23 @@ namespace Library.API
             }
             else
             {
-                app.UseExceptionHandler();
+                app.UseExceptionHandler(appBuilder =>
+                {
+                    appBuilder.Run(async context =>
+                    {
+                        context.Response.StatusCode = 500;
+                        await context.Response.WriteAsync("An unexpected fault happened. Try again later.");
+                    });
+                });
             }
+
+            AutoMapper.Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<Product, Models.ProductDto>()
+                    .ForMember(dest => dest.Name, opt => opt.MapFrom(src=> $"{src.Name} - à venir"));
+
+                cfg.CreateMap<Article, Models.ArticleDto>();
+            });
 
             libraryContext.EnsureSeedDataForContext();
 

@@ -44,19 +44,19 @@ namespace Library.API.Entities
                      Id = new Guid("25320c5e-f58a-4b1f-b63a-8ee07a840bdf"),
                      Name = "Balvanie",
                      Description = "Description scotch",
-                     ProductArticles = new List<ProductArticle>()
+                     Articles = new List<Article>()
                      {
-                         new ProductArticle()
+                         new Article()
                          {
                              Id = new Guid("c7ba6add-09c4-45f8-8dd0-eaca221e5d93"),
                              Title = "SAQ"
                          },
-                         new ProductArticle()
+                         new Article()
                          {
                              Id = new Guid("a3749477-f823-4124-aa4a-fc9ad5e79cd6"),
                              Title = "QuebecWisky",
                          },
-                         new ProductArticle()
+                         new Article()
                          {
                              Id = new Guid("70a1f9b9-0a37-4c1a-99b1-c7709fc64167"),
                              Title = "Malt"
@@ -66,23 +66,24 @@ namespace Library.API.Entities
                 new Product()
                 {
                     Id = new Guid("35320c5e-f58a-4b1f-b63a-8ee07a840bdf"),
-                    Name = "Laga",
-                    Description = "Description biere",
-                    ProductArticles = new List<ProductArticle>()
-                    {
-                        new ProductArticle()
-                        {
-                            Id = new Guid("g7ba6add-09c4-45f8-8dd0-c7709fc64167"),
-                            Title = "Dep"
-                        },
-                    }
-                },new Product()
-                {
-                    Id = new Guid("45320c5e-f58a-4b1f-b63a-8ee07a840bdf"),
                     Name = "Dao",
-                    Description = "Description vin",
-                    ProductArticles = new List<ProductArticle>() { }
+                    Description = "Description Vin",
+                    Articles = new List<Article>()
+                    {
+                        new Article()
+                        {
+                            Id = new Guid("d7ba6add-09c4-45f8-8dd0-eaca221e5d93"),
+                            Title = "SAQ"
+                        }
+                    }
                 },
+                new Product()
+                {
+                    Id = new Guid("35320c5e-f78a-4b1f-b63a-8ee07a840bdf"),
+                    Name = "Laga",
+                    Description = "Description Bìere",
+                    Articles = new List<Article>() { }
+                }
             };
             context.UserAccounts.AddRange(userAccounts);
             context.Products.AddRange(products);

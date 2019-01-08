@@ -103,5 +103,21 @@ namespace Library.API.Services
         {
             return _context.Products.OrderBy(a => a.Name);
         }
+
+        public Product GetProduct(Guid productId)
+        {
+            return _context.Products.FirstOrDefault(p => p.Id == productId);
+        }
+
+        public bool ProductExists(Guid productId)
+        {
+            return _context.Products.Any(p => p.Id == productId);
+        }
+
+        public IEnumerable<Article> GetArticlesForProduct(Guid productId)
+        {
+            return _context.Articles.Where(pa => pa.ProductId == productId)
+                .OrderBy(pa => pa.Title).ToList().ToList();
+        }
     }
 }

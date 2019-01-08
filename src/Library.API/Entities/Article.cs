@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace Library.API.Entities
 {
-    public class ProductArticle
+    public class Article
     {
         public Guid Id { get; set; }
 

@@ -11,13 +11,14 @@ namespace Library.API.Services
         //void AddAuthor(UserAccount userAccount);
         //void DeleteAuthor(UserAccount userAccount);
         //void UpdateAuthor(UserAccount userAccount);
-        //bool AuthorExists(Guid authorId);
         //IEnumerable<Product> GetBooksForAuthor(Guid authorId);
-        //Product GetBookForAuthor(Guid authorId, Guid bookId);
         //void AddBookForAuthor(Guid authorId, Product product);
         //void UpdateBookForAuthor(Product product);
         //void DeleteBook(Product product);
         bool Save();
         IEnumerable<Product> GetProducts();
+        Product GetProduct(Guid productId);
+        bool ProductExists(Guid productId);
+        IEnumerable<Article> GetArticlesForProduct(Guid productId);
     }
 }
