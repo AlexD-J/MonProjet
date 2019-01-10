@@ -13,6 +13,10 @@ namespace Library.API.Entities
         [MaxLength(100)]
         public string Title { get; set; }
 
+        [Required]
+        [MaxLength(500)]
+        public string Url { get; set; }
+
         [ForeignKey("ProductId")]
         public Product Product { get; set; }
 

@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
 using Library.API.Services;
 using Library.API.Entities;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 
 namespace Library.API
@@ -33,7 +34,11 @@ namespace Library.API
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc(setupAction =>
+            {
+                setupAction.ReturnHttpNotAcceptable = true; 
+                setupAction.OutputFormatters.Add(new XmlDataContractSerializerOutputFormatter());
+            });
 
             // register the DbContext on the container, getting the connection string from
             // appSettings (note: use this during development; in a production environment,
@@ -70,14 +75,24 @@ namespace Library.API
             AutoMapper.Mapper.Initialize(cfg =>
             {
                 cfg.CreateMap<Product, Models.ProductDto>()
-                    .ForMember(dest => dest.Name, opt => opt.MapFrom(src=> $"{src.Name} - à venir"));
+                    .ForMember(dest => dest.Name, opt => opt.MapFrom(src=> GenerateNameProduct(src)));
 
                 cfg.CreateMap<Article, Models.ArticleDto>();
+
+                cfg.CreateMap<Models.ProductForCreationDto, Product>();
+
+                cfg.CreateMap<Models.ArticleForCreationDto, Article>();
             });
 
             libraryContext.EnsureSeedDataForContext();
 
             app.UseMvc(); 
+        }
+
+        private string GenerateNameProduct(Product product)
+        {
+            string yearsFormat = product.Age > 0 ? $" {product.Age} years" : "";
+            return $"{product.Name}{yearsFormat}";
         }
     }
 }

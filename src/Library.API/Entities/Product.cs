@@ -17,6 +17,8 @@ namespace Library.API.Entities
         [MaxLength(500)]
         public string Description { get; set; }
 
+        public int Age { get; set; }
+
         public ICollection<Article> Articles { get; set; }
             = new List<Article>();
     }
