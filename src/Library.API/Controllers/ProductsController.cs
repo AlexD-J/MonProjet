@@ -64,5 +64,26 @@ namespace Library.API.Controllers
 
             return CreatedAtRoute("GetProduct", new { id = productToReturn.Id}, productToReturn);
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteProduct(Guid id)
+        {
+            var productFromRepo = _libraryRepository.GetProduct(id);
+            if (productFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            _libraryRepository.DeleteProduct(productFromRepo);
+
+            if (!_libraryRepository.Save())
+            {
+                throw new Exception("Deleting an product failed on save");
+            }
+
+            return NoContent();
+        }
     }
+
+
 }

@@ -14,5 +14,9 @@ namespace Library.API.Services
         Article GetArticleForProduct(Guid productId, Guid articleId);
         void AddProduct(Product productEntity);
         void AddArticleForProduct(Guid productId, Article articleEntity);
+        IEnumerable<Product> GetProducts(IEnumerable<Guid> productIds);
+        void DeleteArticle(Article articleForProductRepo);
+        void DeleteProduct(Product productFromRepo);
+        void UpdateArticleForProduct(Article articleForProductRepo);
     }
 }

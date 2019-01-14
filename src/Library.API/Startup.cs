@@ -38,6 +38,7 @@ namespace Library.API
             {
                 setupAction.ReturnHttpNotAcceptable = true; 
                 setupAction.OutputFormatters.Add(new XmlDataContractSerializerOutputFormatter());
+                setupAction.InputFormatters.Add(new XmlDataContractSerializerInputFormatter());
             });
 
             // register the DbContext on the container, getting the connection string from
@@ -82,6 +83,8 @@ namespace Library.API
                 cfg.CreateMap<Models.ProductForCreationDto, Product>();
 
                 cfg.CreateMap<Models.ArticleForCreationDto, Article>();
+                cfg.CreateMap<Models.ArticleForUpdateDto, Article>();
+                cfg.CreateMap<Article, Models.ArticleForUpdateDto>();
             });
 
             libraryContext.EnsureSeedDataForContext();

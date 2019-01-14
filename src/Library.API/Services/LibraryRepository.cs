@@ -24,6 +24,11 @@ namespace Library.API.Services
             return _context.Products.OrderBy(a => a.Name);
         }
 
+        public IEnumerable<Product> GetProducts(IEnumerable<Guid> productIds)
+        {
+            return _context.Products.Where(a => productIds.Contains(a.Id)).OrderBy(a => a.Name).ThenBy(a => a.Age);
+        }
+
         public Product GetProduct(Guid productId)
         {
             return _context.Products.FirstOrDefault(p => p.Id == productId);
@@ -51,6 +56,11 @@ namespace Library.API.Services
         public void DeleteProduct(Product product)
         {
             _context.Products.Remove(product);
+        }
+
+        public void UpdateArticleForProduct(Article articleForProductRepo)
+        {
+            //No code implemented
         }
 
         public IEnumerable<Article> GetArticlesForProduct(Guid productId)
